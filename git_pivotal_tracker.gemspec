@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.description = "git_pivotal_tracker provides a set of scripts that integrates directly with git to start and finish Pivotal Tracker stories on topic branches"
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "git_pivotal_tracker"
 
   s.add_development_dependency "rspec"
   s.add_runtime_dependency "grit"
