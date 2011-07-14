@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# vim: set syntax=ruby
+
+branch = `git branch 2> /dev/null | grep -e ^* | awk '{print $2}'`
+if branch =~ /-(\d{7,})-/
+  commit_msg = IO.read(ARGV[0])
+  unless commit_msg.include?($1)
+    File.open(ARGV[0], 'w') do |file|
+      file.print commit_msg
+      file.print "[##{$1}]"
+    end
+  end
+end
