@@ -1,9 +1,9 @@
 git-tracker
 ===========
 
-Inspired by [Hashrocket's blend of git and Pivotal Tracker](http://reinh.com/blog/2009/03/02/a-git-workflow-for-agile-teams.html) and [a popular article on effective git workflows](http://blog.carbonfive.com/2010/11/01/integrating-topic-branches-in-git/), I wanted to build a tool to simplify the workflow between the two.
+Inspired by [Hashrocket's blend of git and Pivotal Tracker](http://reinh.com/blog/2009/03/02/a-git-workflow-for-agile-teams.html) and [Carbon Five's article on effective git workflows](http://blog.carbonfive.com/2010/11/01/integrating-topic-branches-in-git/) and [the git-pivotal gem](https://github.com/trydionel/git-pivotal), I wanted a tool that makes the git workflow fun and simple.
 
-It also includes a git prepare-commit-msg hook that appends the story id to all your commit messages from a topic branch:
+Included in this is a git prepare-commit-msg hook that appends the story id in the proper format to all your commit messages so that they show up in Tracker:
 [https://www.pivotaltracker.com/help/api?version=v3#github_hooks](https://www.pivotaltracker.com/help/api?version=v3#github_hooks)
 
 Features
@@ -27,52 +27,57 @@ Print out the Pivotal Tracker story information for the current topic branch
 Examples
 --------
 
-    FIXME (code sample of usage)
+* FIXME (code sample of usage)
 
 Requirements
 ------------
 
-* github
-* tracker project
-* github to tracker api integration turned on
+* a github account
+* a Pivotal Tracker project
+* Pivotal Tracker api service hook turned on for your github project (under Admin -> Service Hooks)
 
 Install
 -------
 
-* gem install git_pivotal_tracker
+``gem install git_pivotal_tracker``
 
 Once installed, git pivotal needs two bits of info: your Pivotal Tracker API Token and your Pivotal Tracker project id:
 
-   git config --global pivotal.api-token 123a456b
+``git config --global pivotal.api-token 123a456b``
 
 The project id is best placed within your project's git config:
 
-   git config -f .git/config pivotal.project-id 88888
+``git config -f .git/config pivotal.project-id 88888``
 
 If you prefer to merge back to a branch other than master when you've finished a story, you can configure that:
 
-   git config --global pivotal.integration-branch develop
+``git config --global pivotal.integration-branch develop``
 
 If you prefer to fetch and rebase from origin before merging (default is no):
 
-   git config --global pivotal.rebase 1
+``git config --global pivotal.rebase 1``
 
 If you prefer to fast-forward your merges into the integration branch (default is --no-ff):
 
-   git config --global pivotal.fast-forward 1
+``git config --global pivotal.fast-forward 1``
 
 If your Pivotal Tracker user name is different than your git user name:
 
-   git config --global pivotal.full-name 'Ben Lindsey'
+``git config --global pivotal.full-name 'Ben Lindsey'``
+
+If you would like verbose logging turned on for git commands:
+
+``git config --global pivotal.verbose 1``
 
 Author
 ------
 
 * Ben Lindsey <ben@carbonfive.com>
 
-Acknowledgements
+Contributors
 ------
-* Inspired by [trydionel](https://github.com/trydionel/git-pivotal)
+
+* [https://github.com/lyahdav](Liron Yahdav)
 
 License
 -------

@@ -7,14 +7,14 @@ module GitPivotalTracker
     def initialize(*args)
       directories = Dir.pwd.split(::File::SEPARATOR)
       begin
-        break if File.directory?(File.join(*directories, GIT_DIR))
+        break if File.directory?(File.join(directories, GIT_DIR))
       end while directories.pop
 
       raise "No #{GIT_DIR} directory found" if directories.empty?
-      root = File.join(*directories, GIT_DIR)
+      root = File.join(directories, GIT_DIR)
       @repository = Grit::Repo.new(root)
 
-      new_hook_path = File.join(*directories, GIT_DIR, 'hooks', 'prepare-commit-msg')
+      new_hook_path = File.join(root, 'hooks', 'prepare-commit-msg')
       unless File.executable?(new_hook_path)
         puts "Installing prepare-commit-msg hook..."
         old_hook_path = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'prepare-commit-msg')

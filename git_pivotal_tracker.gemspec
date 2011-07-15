@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email       = ["ben@carbonfive.com"]
   s.homepage    = "https://github.com/blindsey/git_pivotal_tracker"
   s.summary     = "A git workflow integrated with Pivotal Tracker"
-  s.description = "git_pivotal_tracker provides a set of scripts that integrates directly with git to start and finish Pivotal Tracker stories on topic branches"
+  s.description = "provides a set of git workflow tools to start and finish Pivotal Tracker stories in topic branches"
 
   s.required_rubygems_version = ">= 1.3.6"
 
