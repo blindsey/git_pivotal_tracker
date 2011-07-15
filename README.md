@@ -49,6 +49,10 @@ The project id is best placed within your project's git config:
 
 ``git config -f .git/config pivotal.project-id 88888``
 
+If you project's access is setup to use HTTPS:
+
+``git config -f .git/config pivotal.use-ssl 1``
+
 If you prefer to merge back to a branch other than master when you've finished a story, you can configure that:
 
 ``git config --global pivotal.integration-branch develop``
