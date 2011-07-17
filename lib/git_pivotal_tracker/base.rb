@@ -33,6 +33,8 @@ module GitPivotalTracker
       end
 
       PivotalTracker::Client.token = options[:api_token]
+      PivotalTracker::Client.use_ssl = options[:use_ssl]
+
       nil
     end
 
@@ -72,6 +74,7 @@ module GitPivotalTracker
       options[:rebase]             = repository.config['pivotal.rebase']
       options[:full_name]          = repository.config['pivotal.full-name'] || repository.config['user.name']
       options[:verbose]            = repository.config['pivotal.verbose']
+      options[:use_ssl]            = repository.config['pivotal.use-ssl']
     end
 
     def parse_argv(*args)
@@ -81,6 +84,8 @@ module GitPivotalTracker
         opts.on("-p", "--project-id=", "Pivotal Tracker project id") { |p| options[:project_id] = p }
         opts.on("-b", "--integration-branch=", "The branch to merge finished stories back down onto") { |b| options[:integration_branch] = b }
         opts.on("-f", "--fast-forward=", "Merge topic branch with fast forward") { |f| options[:fast_foward] = f }
+        opts.on("-S", "--use-ssl", "Use SSL for connection to Pivotal Tracker") { |s| options[:use_ssl] = s }
+
         opts.on("-n", "--full-name=", "Your Pivotal Tracker full name") { |n| options[:full_name] = n }
         opts.on("-r", "--rebase=", "Fetch and rebase the integration branch before merging") { |r| options[:rebase] = r }
         opts.on("-v", "--verbose=", "Verbose command logging") { |v| options[:verbose] = v }
