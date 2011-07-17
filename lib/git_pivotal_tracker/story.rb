@@ -24,7 +24,7 @@ module GitPivotalTracker
       log repository.git.checkout({:b => true, :raise => true}, branch)
 
       puts "Updating #{type} status in Pivotal Tracker..."
-      if story.update(:owned_by => options[:name], :current_state => :started)
+      if story.update(:owned_by => options[:full_name], :current_state => :started)
         puts "Success"
         return 0
       else
@@ -33,15 +33,14 @@ module GitPivotalTracker
       end
     end
 
-    private
-
     def type
       self.class.name.downcase.split(/::/).last
     end
 
+    private
+
     def fetch_story
-      # TODO: check for rejected stories as well
-      conditions = { :current_state => "unstarted", :limit => 1, :offset => 0 }
+      conditions = { :current_state => "unstarted", :limit => 1 }
       conditions[:story_type] = type unless type == 'story'
       project.stories.all(conditions).first
     end
