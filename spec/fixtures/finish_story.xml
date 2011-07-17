@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<story>
+  <name>Pause the film</name>
+  <description>As a moderator,
+I can pause the film
+In order to allow another activity to take place (discussion, etc).</description>
+  <story_type>feature</story_type>
+  <estimate>2</estimate>
+  <current_state>finished</current_state>
+  <requested_by>Ben Lindsey</requested_by>
+  <owned_by>Ben Lindsey</owned_by>
+  <labels>moderate,2_needs_design</labels>
+  <project_id>123</project_id>
+  <other_id></other_id>
+  <integration_id></integration_id>
+  <created_at>2011-07-14T23:06:28+00:00</created_at>
+</story>

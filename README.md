@@ -1,4 +1,4 @@
-git-tracker
+git_pivotal_tracker
 ===========
 
 Inspired by [Hashrocket's blend of git and Pivotal Tracker](http://reinh.com/blog/2009/03/02/a-git-workflow-for-agile-teams.html) and [Carbon Five's article on effective git workflows](http://blog.carbonfive.com/2010/11/01/integrating-topic-branches-in-git/) and [the git-pivotal gem](https://github.com/trydionel/git-pivotal), I wanted a tool that makes the git workflow fun and simple.
@@ -18,7 +18,7 @@ These commands collect the first available story from your Pivotal Tracker proje
 
 * `git-finish`
 
-When on a topic branch, this command will fetch the latest integration branch ('master' by default), rebase your topic branch from it, merge the branch into the integration branch with no-fast-forword and push the integration branch to origin.
+When on a topic branch, this command will fetch the latest integration branch ('master' by default), rebase your topic branch from it, merge the branch into the integration branch with no-fast-forward and push the integration branch to origin.
 
 * `git-info`
 
@@ -55,7 +55,7 @@ If you project's access is setup to use HTTPS:
 
 If you prefer to merge back to a branch other than master when you've finished a story, you can configure that:
 
-``git config --global pivotal.integration-branch develop``
+``git config -f .git/config pivotal.integration-branch develop``
 
 If you prefer to fetch and rebase from origin before merging (default is no):
 

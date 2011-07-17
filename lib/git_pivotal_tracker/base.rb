@@ -49,7 +49,9 @@ module GitPivotalTracker
     end
 
     def story_id
-      @story_id ||= current_branch[/\d+/].to_i
+      if current_branch =~ /-(\d+)-/
+        $1
+      end
     end
 
     def project
@@ -80,15 +82,15 @@ module GitPivotalTracker
     def parse_argv(*args)
       OptionParser.new do |opts|
         opts.banner = "Usage: git <feature|chore|bug> [options]"
-        opts.on("-k", "--api-key=", "Pivotal Tracker API key") { |k| options[:api_token] = k }
+        opts.on("-t", "--api-token=", "Pivotal Tracker API key") { |k| options[:api_token] = k }
         opts.on("-p", "--project-id=", "Pivotal Tracker project id") { |p| options[:project_id] = p }
         opts.on("-b", "--integration-branch=", "The branch to merge finished stories back down onto") { |b| options[:integration_branch] = b }
-        opts.on("-f", "--fast-forward=", "Merge topic branch with fast forward") { |f| options[:fast_foward] = f }
-        opts.on("-S", "--use-ssl", "Use SSL for connection to Pivotal Tracker") { |s| options[:use_ssl] = s }
-
         opts.on("-n", "--full-name=", "Your Pivotal Tracker full name") { |n| options[:full_name] = n }
-        opts.on("-r", "--rebase=", "Fetch and rebase the integration branch before merging") { |r| options[:rebase] = r }
-        opts.on("-v", "--verbose=", "Verbose command logging") { |v| options[:verbose] = v }
+
+        opts.on("-F", "--fast-forward", "Merge topic branch with fast forward") { |f| options[:fast_forward] = f }
+        opts.on("-S", "--use-ssl", "Use SSL for connection to Pivotal Tracker") { |s| options[:use_ssl] = s }
+        opts.on("-R", "--rebase", "Fetch and rebase the integration branch before merging") { |r| options[:rebase] = r }
+        opts.on("-V", "--verbose", "Verbose command logging") { |v| options[:verbose] = v }
         opts.on_tail("-h", "--help", "This usage guide") { put opts.to_s; exit 0 }
       end.parse!(args)
     end
