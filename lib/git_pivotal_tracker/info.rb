@@ -5,7 +5,7 @@ module GitPivotalTracker
       return 1 if super
 
       unless story_id
-        put "Branch name must contain a Pivotal Tracker story id"
+        puts "Branch name must contain a Pivotal Tracker story id"
         return 1
       end
 
