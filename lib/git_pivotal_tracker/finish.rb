@@ -11,8 +11,9 @@ module GitPivotalTracker
 
       if options[:rebase]
         puts "Fetching origin and rebasing #{current_branch}"
+        log repository.git.checkout({:raise => true}, integration_branch)
         log repository.git.pull({:raise => true})
-        log repository.git.rebase({:raise => true}, integration_branch)
+        log repository.git.rebase({:raise => true}, integration_branch, current_branch)
       end
 
       puts "Merging #{current_branch} into #{integration_branch}"
