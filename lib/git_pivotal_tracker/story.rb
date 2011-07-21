@@ -14,7 +14,7 @@ module GitPivotalTracker
       puts "URL:   #{story.url}"
       puts "Story: #{story.name}"
 
-      default_suffix = story.name.downcase.gsub(/\W+/, '_')
+      default_suffix = story.name.downcase.strip.gsub(/\W+/, '_')
       print "Enter branch name [#{default_suffix}]: "
       suffix = gets.chomp
       suffix = default_suffix if suffix == ""
