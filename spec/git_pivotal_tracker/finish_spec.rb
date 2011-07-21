@@ -53,7 +53,7 @@ describe GitPivotalTracker::Finish do
 
     it "merges the topic branch into the integration branch with a merge commit" do
       finish.run!.should == 0
-      @repo.head.name.should == @current_head.branch
+      @repo.head.name.should == @current_head.name
       @repo.commits.first.parents.should have(2).items
       @repo.heads.detect { |h| h.name == @current_head.name }.commit.sha.should == @sha
     end
@@ -62,7 +62,7 @@ describe GitPivotalTracker::Finish do
       before do
         finish.options[:rebase] = 1
         finish.repository.git.should_receive(:pull).with(:raise => true)
-        finish.repository.git.should_receive(:rebase).with({:raise => true}, @current_head.name)
+        finish.repository.git.should_receive(:rebase).with({:raise => true}, @current_head.name, @new_branch)
       end
 
       it "succeeds" do
