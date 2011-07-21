@@ -14,10 +14,9 @@ module GitPivotalTracker
       puts "URL:   #{story.url}"
       puts "Story: #{story.name}"
 
-      default_suffix = story.name.downcase.gsub(/\W+/, '_')
-      print "Enter branch name [#{default_suffix}]: "
+      print "Enter branch name [#{branch_suffix story}]: "
       suffix = gets.chomp
-      suffix = default_suffix if suffix == ""
+      suffix = branch_suffix(story) if suffix == ""
 
       branch = "#{story.story_type}-#{story.id}-#{suffix}"
       puts "Checking out a new branch '#{branch}'"
@@ -43,6 +42,10 @@ module GitPivotalTracker
       conditions = { :current_state => "unstarted", :limit => 1 }
       conditions[:story_type] = type unless type == 'story'
       project.stories.all(conditions).first
+    end
+
+    def branch_suffix(story)
+      story.name.sub(/^\W+/, '').sub(/\W+$/, '').gsub(/\W+/, '_').downcase
     end
   end
 
