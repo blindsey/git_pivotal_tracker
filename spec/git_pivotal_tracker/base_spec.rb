@@ -110,6 +110,8 @@ describe GitPivotalTracker::Base do
         stub_git_config({
           'user.name' => 'User Name',
           'pivotal.integration-branch' => 'development',
+          'pivotal.only-mine' => 1,
+          'pivotal.include-rejected' => 1,
           'pivotal.fast-forward' => 1,
           'pivotal.rebase' => 1,
           'pivotal.verbose' => 1,
@@ -128,6 +130,14 @@ describe GitPivotalTracker::Base do
 
       it "sets the project_id" do
         subject.options[:project_id].should == '123'
+      end
+
+      it "sets only_mine" do
+        subject.options[:only_mine].should be
+      end
+
+      it "sets include_rejected" do
+        subject.options[:include_rejected].should be
       end
 
       it "sets fast_forward" do
