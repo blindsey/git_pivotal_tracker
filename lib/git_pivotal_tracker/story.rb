@@ -39,7 +39,9 @@ module GitPivotalTracker
     private
 
     def fetch_story
-      conditions = { :current_state => "unstarted", :limit => 1 }
+      state = options[:include_rejected] ? "unstarted,rejected" : "unstarted"
+      conditions = { :current_state => state, :limit => 1 }
+      conditions[:owned_by] = "\"#{options[:full_name]}\"" if options[:only_mine]
       conditions[:story_type] = type unless type == 'story'
       project.stories.all(conditions).first
     end

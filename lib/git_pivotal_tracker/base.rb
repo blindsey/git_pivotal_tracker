@@ -87,6 +87,9 @@ module GitPivotalTracker
         opts.on("-b", "--integration-branch=", "The branch to merge finished stories back down onto") { |b| options[:integration_branch] = b }
         opts.on("-n", "--full-name=", "Your Pivotal Tracker full name") { |n| options[:full_name] = n }
 
+
+        opts.on("-I", "--include-rejected", "Include rejected stories as well as unstarted ones") { |i| options[:include_rejected] = i }
+        opts.on("-O", "--only-mine", "Only include stories that are assigned to me") { |o| options[:only_mine] = o }
         opts.on("-F", "--fast-forward", "Merge topic branch with fast forward") { |f| options[:fast_forward] = f }
         opts.on("-S", "--use-ssl", "Use SSL for connection to Pivotal Tracker") { |s| options[:use_ssl] = s }
         opts.on("-R", "--rebase", "Fetch and rebase the integration branch before merging") { |r| options[:rebase] = r }
