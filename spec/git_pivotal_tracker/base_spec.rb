@@ -32,6 +32,14 @@ describe GitPivotalTracker::Base do
       it "leaves full_name nil" do
         subject.options[:full_name].should be_nil
       end
+
+      it "leaves include_rejected nil" do
+        subject.options[:include_rejected].should be_nil
+      end
+
+      it "leaves only_mine nil" do
+        subject.options[:only_mine].should be_nil
+      end
     end
 
     it "sets the api_token" do
@@ -52,6 +60,16 @@ describe GitPivotalTracker::Base do
     it "sets full_name" do
       GitPivotalTracker::Base.new("--full-name", "Full Name").options[:full_name].should == 'Full Name'
       GitPivotalTracker::Base.new("-n", "Full Name").options[:full_name].should == 'Full Name'
+    end
+
+    it "sets include_rejected" do
+      GitPivotalTracker::Base.new("--include-rejected").options[:include_rejected].should be
+      GitPivotalTracker::Base.new("-I").options[:include_rejected].should be
+    end
+
+    it "sets only_mine" do
+      GitPivotalTracker::Base.new("--only-mine").options[:only_mine].should be
+      GitPivotalTracker::Base.new("-O").options[:only_mine].should be
     end
 
     it "sets fast_forward" do
@@ -147,13 +165,15 @@ describe GitPivotalTracker::Base do
     end
 
     context "given no prepare-commit-msg hook" do
+      let(:file_name) { ".git/hooks/prepare-commit-msg" }
+
       before do
-        File.delete ".git/hooks/prepare-commit-msg"
+        File.delete file_name if File.exists? file_name
         GitPivotalTracker::Base.new
       end
 
       it "installs the hook" do
-        File.executable?(".git/hooks/prepare-commit-msg").should be
+        File.executable?(file_name).should be
       end
     end
   end
