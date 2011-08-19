@@ -48,7 +48,7 @@ describe GitPivotalTracker::Finish do
       index.add('test.txt', message)
       @sha = index.commit(message, [@repo.heads.detect { |h| h.name == @new_branch }.commit], nil, nil, @new_branch)
 
-      @repo.git.should_receive(:push).with(:raise => true)
+      @repo.git.should_receive(:push).with({:raise => true}, 'origin', @current_head.name)
     end
 
     it "merges the topic branch into the integration branch with a merge commit" do
