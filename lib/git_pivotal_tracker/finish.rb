@@ -24,7 +24,7 @@ module GitPivotalTracker
       log repository.git.merge(merge_options, current_branch)
 
       puts "Pushing #{integration_branch}"
-      log repository.git.push({:raise => true})
+      log repository.git.push({:raise => true}, 'origin', integration_branch)
 
       puts "Marking Story #{story_id} as finished..."
       if story.update(:current_state => finished_state)
