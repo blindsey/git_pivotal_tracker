@@ -1,5 +1,5 @@
-Feature: ./git-info
-  In order to determine what I'm working on
+Feature: Diagnostics
+  In order to determine what Pivotal Tracker story I'm working on
   As a developer
   I want to be able to view the Pivotal Tracker story associated with my current topic branch
 
@@ -8,7 +8,6 @@ Feature: ./git-info
       | Name                | Pivotal Tracker Api Token/Project Id    |
       | git_pivotal_tracker | aa0469780e3d7322b17ab19de416c874/217457 |
 
-  @announce-stdout
   Scenario: View the Pivotal Tracker Story for the Current Topic Branch
     When I run `git-story` interactively
       And I type ""
