@@ -1,1 +1,1 @@
-rvm use --create ruby-1.9.2-p180@git_pivotal_tracker
+rvm use --create ruby-1.9.2-p290@git_pivotal_tracker
