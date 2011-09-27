@@ -49,7 +49,7 @@ The project id is best placed within your project's git config:
 
 ``git config -f .git/config pivotal.project-id 88888``
 
-If you project's access is setup to use HTTPS:
+If your project's access is setup to use HTTPS:
 
 ``git config -f .git/config pivotal.use-ssl 1``
 
