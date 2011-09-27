@@ -79,6 +79,7 @@ module GitPivotalTracker
       options[:full_name]          = repository.config['pivotal.full-name'] || repository.config['user.name']
       options[:verbose]            = repository.config['pivotal.verbose']
       options[:use_ssl]            = repository.config['pivotal.use-ssl']
+      options[:delete_branch]      = repository.config['pivotal.delete-branch']
     end
 
     def parse_argv(*args)
@@ -90,6 +91,7 @@ module GitPivotalTracker
         opts.on("-n", "--full-name=", "Your Pivotal Tracker full name") { |n| options[:full_name] = n }
 
 
+        opts.on("-D", "--delete-branch", "Delete store branch after merging") { |d| options[:delete_branch] = d }
         opts.on("-I", "--include-rejected", "Include rejected stories as well as unstarted ones") { |i| options[:include_rejected] = i }
         opts.on("-O", "--only-mine", "Only include stories that are assigned to me") { |o| options[:only_mine] = o }
         opts.on("-F", "--fast-forward", "Merge topic branch with fast forward") { |f| options[:fast_forward] = f }

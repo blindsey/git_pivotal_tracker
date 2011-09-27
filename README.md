@@ -69,6 +69,10 @@ If your Pivotal Tracker user name is different than your git user name:
 
 ``git config --global pivotal.full-name 'Ben Lindsey'``
 
+If you prefer to have story branches deleted after they are merged by `git-finish`:
+
+``git config --global pivotal.delete-branch 1``
+
 If you would like verbose logging turned on for git commands:
 
 ``git config --global pivotal.verbose 1``

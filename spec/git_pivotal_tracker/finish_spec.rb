@@ -57,6 +57,11 @@ describe GitPivotalTracker::Finish do
       @repo.commits.first.parents.should have(2).items
       @repo.heads.detect { |h| h.name == @current_head.name }.commit.sha.should == @sha
     end
+    
+    it "does not delete story branch" do
+      finish.run!.should == 0
+      @repo.git.branch.should match @new_branch
+    end
 
     context "when I have rebase turned on" do
       before do
@@ -78,6 +83,17 @@ describe GitPivotalTracker::Finish do
       it "merges the topic branch without a merge commit" do
         finish.run!.should == 0
         @repo.heads.detect { |h| h.name == @current_head.name }.commit.sha.should == @sha
+      end
+    end
+    
+    context "when I have delete branch turned on" do
+      before do
+        finish.options[:delete_branch] = 1
+      end
+      
+      it "deletes the story branch after merging" do
+        finish.run!.should == 0
+        @repo.git.branch.should_not match @new_branch
       end
     end
   end
