@@ -45,7 +45,7 @@ module GitPivotalTracker
     end
     
     def current_branch_suffix
-      if current_branch_suffix =~ /.*-\d+?-(.*)/ and @repository.branches.any? { |branch| branch == $1 }
+      if current_branch =~ /.*-\d+?-(.*)/ and @repository.branches.any? { |branch| branch.name == $1 }
         $1
       end
     end
