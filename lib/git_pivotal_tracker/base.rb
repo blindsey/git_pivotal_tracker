@@ -41,7 +41,7 @@ module GitPivotalTracker
     protected
 
     def integration_branch
-      options[:integration_branch] || current_branch_suffix || 'master'
+      current_branch_suffix || options[:integration_branch] || 'master'
     end
     
     def current_branch_suffix
