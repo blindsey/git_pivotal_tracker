@@ -174,8 +174,8 @@ describe GitPivotalTracker::Base do
       end
     end
 
-    context "given no prepare-commit-msg hook" do
-      let(:file_name) { ".git/hooks/prepare-commit-msg" }
+    context "given no commit-msg hook" do
+      let(:file_name) { ".git/hooks/commit-msg" }
 
       before do
         File.delete file_name if File.exists? file_name

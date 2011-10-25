@@ -7,7 +7,7 @@ if branch =~ /-(\d{7,})-/
   unless commit_msg.include?($1)
     File.open(ARGV[0], 'w') do |file|
       file.print commit_msg
-      file.print "[##{$1}]"
+      file.print " [##{$1}]"
     end
   end
 end
