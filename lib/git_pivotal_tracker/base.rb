@@ -14,10 +14,10 @@ module GitPivotalTracker
       root = File.join(directories, GIT_DIR)
       @repository = Grit::Repo.new(root)
 
-      new_hook_path = File.join(root, 'hooks', 'prepare-commit-msg')
+      new_hook_path = File.join(root, 'hooks', 'commit-msg')
       unless File.executable?(new_hook_path)
-        puts "Installing prepare-commit-msg hook..."
-        old_hook_path = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'prepare-commit-msg')
+        puts "Installing commit-msg hook..."
+        old_hook_path = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'commit-msg')
         FileUtils.cp(old_hook_path, new_hook_path, :preserve => true)
       end
 
