@@ -41,7 +41,13 @@ module GitPivotalTracker
     protected
 
     def integration_branch
-      options[:integration_branch] || 'master'
+      current_branch_suffix || options[:integration_branch] || 'master'
+    end
+    
+    def current_branch_suffix
+      if current_branch =~ /.*-\d+?-(.*)/ and @repository.branches.any? { |branch| branch.name == $1 }
+        $1
+      end
     end
 
     def current_branch
