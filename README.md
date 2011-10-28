@@ -1,10 +1,13 @@
-git_pivotal_tracker
+bookrenter\_git\_pivotal\_tracker
 ===========
 
-Inspired by [Hashrocket's blend of git and Pivotal Tracker](http://reinh.com/blog/2009/03/02/a-git-workflow-for-agile-teams.html) and [Carbon Five's article on effective git workflows](http://blog.carbonfive.com/2010/11/01/integrating-topic-branches-in-git/) and [the git-pivotal gem](https://github.com/trydionel/git-pivotal), I wanted a tool that makes the git workflow fun and simple.
+Forked from the awesome Git Pivotal Tracker gem by Ben Lindsey and Carbon Five.  (You can find the original [here](https://github.com/blindsey/git_pivotal_tracker))
 
-Included in this is a git prepare-commit-msg hook that appends the story id in the proper format to all your commit messages so that they show up in Tracker:
-[https://www.pivotaltracker.com/help/api?version=v3#github_hooks](https://www.pivotaltracker.com/help/api?version=v3#github_hooks)
+Changes included in this version:
+
+* Option to automatically delete story branches once they've been merged
+* Ability to pick your integration branch on the fly (when you start a new story)
+* Changed git hook from prepare-commit-msg to commit-msg since commit-msg is better supported by git apps
 
 Features
 --------
@@ -14,11 +17,19 @@ Features
 * `git-bug`
 * `git-chore`
 
-These commands collect the first available story from your Pivotal Tracker project and create a topic branch for it.
+These commands start the first available story from your Pivotal Tracker project and create a topic branch for it.
 
 * `git-finish`
 
-When on a topic branch, this command will fetch the latest integration branch ('master' by default), rebase your topic branch from it, merge the branch into the integration branch with no-fast-forward and push the integration branch to origin.
+When on a topic branch, this command will:
+
+* Fetch the latest integration branch ('master' by default), 
+* Rebase your topic branch from it
+* Merge the topic branch into the integration branch with no-fast-forward 
+* Push the integration branch to origin
+* (Optionally) delete the topic branch
+
+You can customize your integration branch in 2 ways.  You can set the integration branch in your git config (see config options below).  Additionally, when you create a topic branch, it prompts you for a branch suffix name; if the suffix name you supply is the name of an existing local branch, that branch will be used as your integration branch for that story only.  This method will override the integration branch specified in your git config when applicable.
 
 * `git-info`
 
