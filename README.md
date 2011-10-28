@@ -60,7 +60,7 @@ The project id is best placed within your project's git config:
 
 ``git config -f .git/config pivotal.project-id 88888``
 
-If you project's access is setup to use HTTPS:
+If your project's access is setup to use HTTPS:
 
 ``git config -f .git/config pivotal.use-ssl 1``
 
@@ -79,6 +79,10 @@ If you prefer to fast-forward your merges into the integration branch (default i
 If your Pivotal Tracker user name is different than your git user name:
 
 ``git config --global pivotal.full-name 'Ben Lindsey'``
+
+If you prefer to have story branches deleted after they are merged by `git-finish`:
+
+``git config --global pivotal.delete-branch 1``
 
 If you would like verbose logging turned on for git commands:
 

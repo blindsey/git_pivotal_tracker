@@ -40,6 +40,10 @@ describe GitPivotalTracker::Base do
       it "leaves only_mine nil" do
         subject.options[:only_mine].should be_nil
       end
+
+      it "leaves delete_branch nil" do
+        subject.options[:delete_branch].should be_nil
+      end
     end
 
     it "sets the api_token" do
@@ -90,6 +94,11 @@ describe GitPivotalTracker::Base do
     it "sets verbose" do
       GitPivotalTracker::Base.new("--verbose").options[:verbose].should be
       GitPivotalTracker::Base.new("-V").options[:verbose].should be
+    end
+    
+    it "sets delete_branch" do
+      GitPivotalTracker::Base.new("--delete-branch").options[:delete_branch].should be
+      GitPivotalTracker::Base.new("-D").options[:delete_branch].should be
     end
   end
 
@@ -174,8 +183,8 @@ describe GitPivotalTracker::Base do
       end
     end
 
-    context "given no prepare-commit-msg hook" do
-      let(:file_name) { ".git/hooks/prepare-commit-msg" }
+    context "given no commit-msg hook" do
+      let(:file_name) { ".git/hooks/commit-msg" }
 
       before do
         File.delete file_name if File.exists? file_name
