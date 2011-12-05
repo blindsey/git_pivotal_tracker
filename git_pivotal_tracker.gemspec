@@ -5,14 +5,14 @@ $:.unshift lib unless $:.include?(lib)
 require 'git_pivotal_tracker/version'
 
 Gem::Specification.new do |s|
-  s.name        = "git_pivotal_tracker"
+  s.name        = "bookrenter_git_pivotal_tracker"
   s.version     = GitPivotalTracker::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Ben Lindsey"]
-  s.email       = ["ben@carbonfive.com"]
-  s.homepage    = "https://github.com/blindsey/git_pivotal_tracker"
+  s.authors     = ["Philippe Huibonhoa"]
+  s.email       = ["philippe.huibonhoa@bookrenter.com"]
+  s.homepage    = "http://github.com/phuibonhoa/git_pivotal_tracker"
   s.summary     = "A git workflow integrated with Pivotal Tracker"
-  s.description = "provides a set of git workflow tools to start and finish Pivotal Tracker stories in topic branches"
+  s.description = "Provides a set of git workflow tools to start and finish Pivotal Tracker stories in topic branches"
 
   s.required_rubygems_version = ">= 1.3.6"
 
