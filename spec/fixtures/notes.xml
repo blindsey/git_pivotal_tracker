@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notes type="array">
+  <note>
+    <id type="integer">12563167</id>
+    <text>Testing comments</text>
+    <author>Ben Lindsey</author>
+    <noted_at type="datetime">2011/12/05 05:27:33 UTC</noted_at>
+  </note>
+</notes>

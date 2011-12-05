@@ -30,6 +30,9 @@ module GitPivotalTracker
         puts "Unable to mark #{type} as started"
         return 1
       end
+    rescue Grit::Git::CommandFailed => e
+      puts "git error: #{e.err}"
+      return 1
     end
 
     def type
@@ -41,8 +44,8 @@ module GitPivotalTracker
     def fetch_story
       state = options[:include_rejected] ? "unstarted,rejected" : "unstarted"
       conditions = { :current_state => state, :limit => 1 }
+      conditions[:story_type] = type == 'story' ? 'bug,chore,feature' : type
       conditions[:owned_by] = "\"#{options[:full_name]}\"" if options[:only_mine]
-      conditions[:story_type] = type unless type == 'story'
       project.stories.all(conditions).first
     end
 

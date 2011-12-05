@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = GitPivotalTracker::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ben Lindsey"]
-  s.email       = ["ben@carbonfive.com"]
+  s.email       = ["ben@cumulo.us"]
   s.homepage    = "https://github.com/blindsey/git_pivotal_tracker"
   s.summary     = "A git workflow integrated with Pivotal Tracker"
   s.description = "provides a set of git workflow tools to start and finish Pivotal Tracker stories in topic branches"
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "webmock"
+  s.add_development_dependency "aruba"
   s.add_runtime_dependency "grit"
   s.add_runtime_dependency "pivotal-tracker"
 

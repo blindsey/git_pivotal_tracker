@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <story>
   <id>1234567890</id>
+  <url>http://www.pivotaltracker.com/story/show/1234567890</url>
   <name> Pause the film!</name>
   <description>As a moderator,
 I can pause the film

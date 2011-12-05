@@ -34,6 +34,9 @@ module GitPivotalTracker
         puts "Unable to mark Story #{story_id} as finished"
         return 1
       end
+    rescue Grit::Git::CommandFailed => e
+      puts "git error: #{e.err}"
+      return 1
     end
 
     private

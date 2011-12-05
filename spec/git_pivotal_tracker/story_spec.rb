@@ -10,7 +10,7 @@ describe GitPivotalTracker::Story do
 
     context "given there are no stories" do
       before do
-        stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted&limit=1').
+        stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted%20story_type:bug,chore,feature&limit=1').
             to_return :body => File.read("#{FIXTURES_PATH}/no_stories.xml")
       end
 
@@ -35,7 +35,7 @@ describe GitPivotalTracker::Story do
         before do
           @story = GitPivotalTracker::Story.new("-t", "8a8a8a8", "-p", "123", "--include-rejected")
 
-          stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted,rejected&limit=1').
+          stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted,rejected%20story_type:bug,chore,feature&limit=1').
               to_return :body => File.read("#{FIXTURES_PATH}/one_story.xml")
         end
 
@@ -48,7 +48,7 @@ describe GitPivotalTracker::Story do
       context "when the only-mine flag is set" do
         before do
           @story = GitPivotalTracker::Story.new("-t", "8a8a8a8", "-p", "123", "--full-name", "Ben Lindsey", "--only-mine")
-          stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted%20owned_by:%22Ben%20Lindsey%22&limit=1').
+          stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted%20story_type:bug,chore,feature%20owned_by:%22Ben%20Lindsey%22&limit=1').
               to_return :body => File.read("#{FIXTURES_PATH}/one_story.xml")
         end
 
@@ -60,7 +60,7 @@ describe GitPivotalTracker::Story do
 
       context "when the default options are used" do
         before do
-          stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted&limit=1').
+          stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories?filter=current_state:unstarted%20story_type:bug,chore,feature&limit=1').
               to_return :body => File.read("#{FIXTURES_PATH}/one_story.xml")
         end
 

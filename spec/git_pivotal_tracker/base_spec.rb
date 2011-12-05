@@ -13,32 +13,14 @@ describe GitPivotalTracker::Base do
         subject.options[:integration_branch].should be_nil
       end
 
-      it "leaves fast_forward nil" do
-        subject.options[:fast_forward].should be_nil
-      end
-
-      it "leaves rebase nil" do
-        subject.options[:rebase].should be_nil
-      end
-
-      it "leaves verbose nil" do
-        subject.options[:verbose].should be_nil
-      end
-
-      it "leaves use_ssl nil" do
-        subject.options[:use_ssl].should be_nil
-      end
-
       it "leaves full_name nil" do
         subject.options[:full_name].should be_nil
       end
 
-      it "leaves include_rejected nil" do
-        subject.options[:include_rejected].should be_nil
-      end
-
-      it "leaves only_mine nil" do
-        subject.options[:only_mine].should be_nil
+      [:fast_forward, :rebase, :verbose, :use_ssl, :include_rejected, :only_mine].each do |key|
+        it "does not set #{key}" do
+          subject.options[key].should_not be
+        end
       end
     end
 
@@ -110,12 +92,12 @@ describe GitPivotalTracker::Base do
         stub_git_config({
           'user.name' => 'User Name',
           'pivotal.integration-branch' => 'development',
-          'pivotal.only-mine' => 1,
-          'pivotal.include-rejected' => 1,
-          'pivotal.fast-forward' => 1,
-          'pivotal.rebase' => 1,
-          'pivotal.verbose' => 1,
-          'pivotal.use-ssl' => 1
+          'pivotal.only-mine' => '1',
+          'pivotal.include-rejected' => '1',
+          'pivotal.fast-forward' => '1',
+          'pivotal.rebase' => '1',
+          'pivotal.verbose' => '1',
+          'pivotal.use-ssl' => '1'
         })
         subject = GitPivotalTracker::Base.new
       end
@@ -132,28 +114,34 @@ describe GitPivotalTracker::Base do
         subject.options[:project_id].should == '123'
       end
 
-      it "sets only_mine" do
-        subject.options[:only_mine].should be
-      end
-
-      it "sets include_rejected" do
-        subject.options[:include_rejected].should be
-      end
-
-      it "sets fast_forward" do
-        subject.options[:fast_forward].should be
-      end
-
-      it "sets rebase" do
-        subject.options[:rebase].should be
-      end
-
-      it "sets verbose" do
-        subject.options[:verbose].should be
+      [:only_mine, :include_rejected, :fast_forward, :rebase, :verbose, :use_ssl].each do |key|
+        it "sets #{key}" do
+          subject.options[key].should be
+        end
       end
 
       it "sets the full_name to the user name" do
         subject.options[:full_name].should == 'User Name'
+      end
+    end
+
+    context "with options set to 0" do
+      before do
+        stub_git_config({
+          'pivotal.only-mine' => '0',
+          'pivotal.include-rejected' => '0',
+          'pivotal.fast-forward' => '0',
+          'pivotal.rebase' => '0',
+          'pivotal.verbose' => '0',
+          'pivotal.use-ssl' => '0'
+        })
+        subject = GitPivotalTracker::Base.new
+      end
+
+      [:only_mine, :include_rejected, :fast_forward, :rebase, :verbose, :use_ssl].each do |key|
+        it "does not set #{key}" do
+          subject.options[key].should_not be
+        end
       end
     end
   end
