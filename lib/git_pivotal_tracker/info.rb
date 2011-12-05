@@ -13,6 +13,9 @@ module GitPivotalTracker
       puts "Story:         #{story.name}"
       puts "Description:   #{story.description}"
 
+      notes = story.notes.all.collect(&:text).join("\n")
+      puts "Comments:      #{notes}"
+
       return 0
     end
   end
