@@ -69,16 +69,15 @@ module GitPivotalTracker
     private
 
     def parse_gitconfig
-      options[:api_token]          = repository.config['pivotal.api-token']
-      options[:project_id]         = repository.config['pivotal.project-id']
-      options[:integration_branch] = repository.config['pivotal.integration-branch']
-      options[:only_mine]          = repository.config['pivotal.only-mine']
-      options[:include_rejected]   = repository.config['pivotal.include-rejected']
-      options[:fast_forward]       = repository.config['pivotal.fast-forward']
-      options[:rebase]             = repository.config['pivotal.rebase']
-      options[:full_name]          = repository.config['pivotal.full-name'] || repository.config['user.name']
-      options[:verbose]            = repository.config['pivotal.verbose']
-      options[:use_ssl]            = repository.config['pivotal.use-ssl']
+      ['api-token', 'project-id', 'integration-branch'].each do |key|
+        options[key.sub(/-/, '_').to_sym] = repository.config["pivotal.#{key}"]
+      end
+
+      ['only-mine', 'include-rejected', 'fast-forward', 'rebase', 'verbose', 'use-ssl'].each do |key|
+        options[key.sub(/-/, '_').to_sym] = repository.config["pivotal.#{key}"] == '1'
+      end
+
+      options[:full_name] = repository.config['pivotal.full-name'] || repository.config['user.name']
     end
 
     def parse_argv(*args)
