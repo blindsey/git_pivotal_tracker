@@ -5,8 +5,19 @@ module GitPivotalTracker
       return 1 if super
 
       puts "Retrieving latest #{type} from Pivotal Tracker"
+      story = nil
+      if options[:interactive]
+        stories = fetch_stories(10)
+        stories.each_with_index do |s, i|
+          puts "#{i}) #{s.story_type} #{s.id} #{s.name}"
+        end
+        print "Pick a story: "
+        story = stories[gets.chomp.to_i]
+      else
+        story = fetch_stories.first
+      end
 
-      unless story = fetch_story
+      unless story
         puts "No #{type} available!"
         return 1
       end
@@ -41,12 +52,12 @@ module GitPivotalTracker
 
     private
 
-    def fetch_story
+    def fetch_stories(count = 1)
       state = options[:include_rejected] ? "unstarted,rejected" : "unstarted"
-      conditions = { :current_state => state, :limit => 1 }
+      conditions = { :current_state => state, :limit => count }
       conditions[:story_type] = type == 'story' ? 'bug,chore,feature' : type
       conditions[:owned_by] = "\"#{options[:full_name]}\"" if options[:only_mine]
-      project.stories.all(conditions).first
+      project.stories.all(conditions)
     end
 
     def branch_suffix(story)
