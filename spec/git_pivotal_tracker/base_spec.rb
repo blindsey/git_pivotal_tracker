@@ -17,7 +17,7 @@ describe GitPivotalTracker::Base do
         subject.options[:full_name].should be_nil
       end
 
-      [:fast_forward, :rebase, :verbose, :use_ssl, :include_rejected, :only_mine].each do |key|
+      [:fast_forward, :rebase, :verbose, :use_ssl, :include_rejected, :only_mine, :interactive].each do |key|
         it "does not set #{key}" do
           subject.options[key].should_not be
         end
@@ -73,6 +73,11 @@ describe GitPivotalTracker::Base do
       GitPivotalTracker::Base.new("--verbose").options[:verbose].should be
       GitPivotalTracker::Base.new("-V").options[:verbose].should be
     end
+
+    it "sets interactive" do
+      GitPivotalTracker::Base.new("--interactive").options[:interactive].should be
+      GitPivotalTracker::Base.new("-X").options[:interactive].should be
+    end
   end
 
   describe "#parse_gitconfig" do
@@ -97,7 +102,8 @@ describe GitPivotalTracker::Base do
           'pivotal.fast-forward' => '1',
           'pivotal.rebase' => '1',
           'pivotal.verbose' => '1',
-          'pivotal.use-ssl' => '1'
+          'pivotal.use-ssl' => '1',
+          'pivotal.interactive' => '1'
         })
         subject = GitPivotalTracker::Base.new
       end
@@ -114,7 +120,7 @@ describe GitPivotalTracker::Base do
         subject.options[:project_id].should == '123'
       end
 
-      [:only_mine, :include_rejected, :fast_forward, :rebase, :verbose, :use_ssl].each do |key|
+      [:only_mine, :include_rejected, :fast_forward, :rebase, :verbose, :use_ssl, :interactive].each do |key|
         it "sets #{key}" do
           subject.options[key].should be
         end
@@ -133,12 +139,13 @@ describe GitPivotalTracker::Base do
           'pivotal.fast-forward' => '0',
           'pivotal.rebase' => '0',
           'pivotal.verbose' => '0',
-          'pivotal.use-ssl' => '0'
+          'pivotal.use-ssl' => '0',
+          'pivotal.interactive' => '0'
         })
         subject = GitPivotalTracker::Base.new
       end
 
-      [:only_mine, :include_rejected, :fast_forward, :rebase, :verbose, :use_ssl].each do |key|
+      [:only_mine, :include_rejected, :fast_forward, :rebase, :verbose, :use_ssl, :interactive].each do |key|
         it "does not set #{key}" do
           subject.options[key].should_not be
         end
