@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 describe GitPivotalTracker::Finish do
 
   before do
+    File.delete( "test.txt" ) if File.exists?( "test.txt" )
     stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123').
         to_return :body => File.read("#{FIXTURES_PATH}/project.xml")
     stub_request(:get, 'http://www.pivotaltracker.com/services/v3/projects/123/stories/1234567890').
@@ -55,7 +56,7 @@ describe GitPivotalTracker::Finish do
       finish.run!.should == 0
       @repo.head.name.should == @current_head.name
       @repo.commits.first.parents.should have(2).items
-      @repo.heads.detect { |h| h.name == @current_head.name }.commit.sha.should == @sha
+      @repo.commits( @current_head.name ).first.sha.should == @sha
     end
 
     context "when I have rebase turned on" do
