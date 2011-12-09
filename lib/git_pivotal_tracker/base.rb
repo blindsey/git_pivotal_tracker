@@ -73,7 +73,7 @@ module GitPivotalTracker
         options[key.sub(/-/, '_').to_sym] = repository.config["pivotal.#{key}"]
       end
 
-      ['only-mine', 'include-rejected', 'fast-forward', 'rebase', 'verbose', 'use-ssl', 'interactive'].each do |key|
+      ['only-mine', 'include-rejected', 'fast-forward', 'rebase', 'verbose', 'use-ssl', 'interactive', 'delete-branch'].each do |key|
         options[key.sub(/-/, '_').to_sym] = repository.config["pivotal.#{key}"] == '1'
       end
 
@@ -96,6 +96,7 @@ module GitPivotalTracker
         opts.on("-R", "--rebase", "Fetch and rebase the integration branch before merging") { |r| options[:rebase] = r }
         opts.on("-V", "--verbose", "Verbose command logging") { |v| options[:verbose] = v }
         opts.on("-X", "--interactive", "Interactive story picking") { |x| options[:interactive] = x }
+        opts.on("-D", "--delete-branch", "Delete topic branch after merge") { |d| options[:delete_branch] = d }
         opts.on_tail("-h", "--help", "This usage guide") { put opts.to_s; exit 0 }
       end.parse!(args)
     end
