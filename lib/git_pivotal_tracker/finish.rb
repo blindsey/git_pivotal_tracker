@@ -28,6 +28,7 @@ module GitPivotalTracker
 
       puts "Marking Story #{story_id} as finished..."
       if story.update(:current_state => finished_state)
+        delete_current_branch if options[:delete_branch]
         puts "Success"
         return 0
       else
@@ -43,6 +44,11 @@ module GitPivotalTracker
 
     def finished_state
       story.story_type == "chore" ? "accepted" : "finished"
+    end
+
+    def delete_current_branch
+      puts "Deleting #{current_branch}"
+      log repository.git.branch({:raise => true, :d => true}, current_branch)
     end
   end
 end

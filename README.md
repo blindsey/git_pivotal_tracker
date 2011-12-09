@@ -65,6 +65,18 @@ If you prefer to fast-forward your merges into the integration branch (default i
 
 ``git config --global pivotal.fast-forward 1``
 
+If you prefer to choose one of the first 10 stories interactively:
+
+``git config --global pivotal.interactive 1``
+
+If you prefer to delete your topic branch after a successful merge into the integration branch:
+
+``git config --global pivotal.delete-branch 1``
+
+If you would only like to take stories that are assigned to you:
+
+``git config --global pivotal.only-mine 1``
+
 If your Pivotal Tracker user name is different than your git user name:
 
 ``git config --global pivotal.full-name 'Ben Lindsey'``
@@ -76,12 +88,13 @@ If you would like verbose logging turned on for git commands:
 Author
 ------
 
-* Ben Lindsey <ben@carbonfive.com>
+* Ben Lindsey <ben@cumulo.us>
 
 Contributors
 ------
 
-* [https://github.com/lyahdav](Liron Yahdav)
+* [Liron Yahdav](https://github.com/lyahdav)
+* [Philippe Huibonhoa](https://github.com/phuibonhoa)
 
 License
 -------
