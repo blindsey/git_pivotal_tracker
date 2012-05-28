@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stories type="array" count="1" total="2" limit="1">
+  <story>
+    <id type="integer">1234567890</id>
+    <project_id type="integer">123</project_id>
+    <story_type>feature</story_type>
+    <url>http://www.pivotaltracker.com/story/show/1234567890</url>
+    <estimate type="integer">2</estimate>
+    <current_state>unstarted</current_state>
+    <description>As a moderator,
+I can pause the film
+In order to allow another activity to take place (discussion, etc).</description>
+    <name> Pause the film!</name>
+    <requested_by>Ben Lindsey</requested_by>
+    <created_at type="datetime">2011/07/14 23:06:28 UTC</created_at>
+    <updated_at type="datetime">2011/07/14 23:13:24 UTC</updated_at>
+    <labels>moderate,2_needs_design</labels>
+  </story>
+</stories>
