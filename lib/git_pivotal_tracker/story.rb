@@ -12,7 +12,7 @@ module GitPivotalTracker
           puts "#{i}) #{s.story_type} #{s.id} #{s.name}"
         end
         print "Pick a story: "
-        story = stories[gets.chomp.to_i]
+        story = stories[STDIN.gets.chomp.to_i]
       else
         story = fetch_stories.first
       end
@@ -26,7 +26,7 @@ module GitPivotalTracker
       puts "Story: #{story.name}"
 
       print "Enter branch name [#{branch_suffix story}]: "
-      suffix = gets.chomp
+      suffix = STDIN.gets.chomp
       suffix = branch_suffix(story) if suffix == ""
 
       branch = "#{story.story_type}-#{story.id}-#{suffix}"

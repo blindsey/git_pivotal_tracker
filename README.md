@@ -27,7 +27,29 @@ Print out the Pivotal Tracker story information for the current topic branch
 Examples
 --------
 
-* FIXME (code sample of usage)
+* grab the next feature in the backlog
+
+  `% git feature`
+
+* grab the next bug in the backlog
+
+  `% git bug`
+
+* grab the next chore in the backlog
+
+  `% git chore`
+
+* grab the next story in the backlog (of whatever type)
+
+  `% git story`
+
+* grab the first available story (rejected or not yet started)
+
+  `% git story -I`
+
+* get an interactive list of stories that may include rejected 
+
+  `% git story -X -I`
 
 Requirements
 ------------
